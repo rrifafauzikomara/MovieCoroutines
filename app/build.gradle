@@ -20,15 +20,14 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "BASE_URL", BASE_URL
+            buildConfigField 'String', 'MOVIE_DB_API_KEY', MovieDbApiKey
         }
         release {
             buildConfigField "String", "BASE_URL", BASE_URL
+            buildConfigField 'String', 'MOVIE_DB_API_KEY', MovieDbApiKey
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    buildTypes.each {
-        it.buildConfigField 'String', 'MOVIE_DB_API_KEY', MovieDbApiKey
     }
     dataBinding {
         enabled = true
@@ -40,6 +39,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.core:core-ktx:$ktx_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$test_junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidTest_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidTest_espresso_version"

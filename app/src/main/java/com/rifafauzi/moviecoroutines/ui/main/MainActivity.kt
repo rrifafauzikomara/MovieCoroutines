@@ -1,7 +1,8 @@
-package com.rifafauzi.moviecoroutines
+package com.rifafauzi.moviecoroutines.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rifafauzi.moviecoroutines.R
 
 class MainActivity : AppCompatActivity() {
 
