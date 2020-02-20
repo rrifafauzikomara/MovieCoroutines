@@ -18,10 +18,17 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", BASE_URL
+        }
         release {
+            buildConfigField "String", "BASE_URL", BASE_URL
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'MOVIE_DB_API_KEY', MovieDbApiKey
     }
     dataBinding {
         enabled = true
@@ -60,6 +67,19 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$logingVersion"
 
+    // Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    // Dependencies for Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
     // Dependencies for Shimmer
     implementation "com.facebook.shimmer:shimmer:$shimmer_version"
+
+    // Dependencies for Multidex
+    implementation "com.android.support:multidex:$multidex_version"
 }
