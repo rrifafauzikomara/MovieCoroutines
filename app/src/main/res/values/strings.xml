@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Movie Coroutines</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_internet_connection">No Internet Connection. Please check your internet connection again</string>
+    <string name="timeout">Request timeout, Please make sure you have stable internet connection</string>
+    <string name="unknown_error">Sorry. There is unknown error on our end.\nPlease try again later</string>
+    <string name="empty_data">Sorry. Data not found</string>
+    <string name="poster">Poster</string>
 </resources>
