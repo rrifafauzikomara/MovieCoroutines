@@ -42,5 +42,4 @@ class MovieApp : Application(), HasAndroidInjector {
             Timber.plant(Timber.DebugTree())
         }
     }
-
 }
