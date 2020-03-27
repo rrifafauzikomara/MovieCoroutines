@@ -4,9 +4,14 @@ import android.app.Application
 import android.content.Context
 import com.rifafauzi.moviecoroutines.MovieApp
 import com.rifafauzi.moviecoroutines.api.ApiService
+import com.rifafauzi.moviecoroutines.repository.MovieRepository
+import com.rifafauzi.moviecoroutines.repository.MovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -28,4 +33,19 @@ class AppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit) : ApiService = retrofit.create(ApiService::class.java)
 
+    @Provides
+    @Singleton
+    @Named("IO")
+    fun provideBackgroundDispatchers(): CoroutineDispatcher =
+        Dispatchers.IO
+    @Provides
+    @Singleton
+    @Named("MAIN")
+    fun provideMainDispatchers(): CoroutineDispatcher =
+        Dispatchers.Main
+
+    @Provides
+    @Singleton
+    fun provideMovieRepository(apiService: ApiService): MovieRepository=
+        MovieRepositoryImpl(apiService)
 }
