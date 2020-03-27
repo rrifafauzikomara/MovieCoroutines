@@ -42,10 +42,10 @@ class MovieViewModel @Inject constructor(
     }
 
     internal fun getNowPlaying() {
-        setResultNowPlaying(ResultState.Loading())
         viewModelScope.launch(mainCoroutineDispatcher) {
-            val result = async(context = backgroundDispatcher) { repository.getListMovie() }
             try {
+                setResultNowPlaying(ResultState.Loading())
+                val result = async(context = backgroundDispatcher) { repository.getListMovie() }
                 showNoData(result)
                 showHasData(result)
             } catch (e: Throwable) {

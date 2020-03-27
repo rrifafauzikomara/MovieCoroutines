@@ -31,9 +31,13 @@ class MovieViewModelTest {
     var instantExecutorRule = InstantTaskExecutorRule()
     @Test
     fun getMovie() {
+
+
         mainCoroutineRule.runBlockingTest {
             val movieResponse =
                 listOf<MovieModel>()
+
+
             coEvery { _repository.getListMovie() } returns movieResponse
             _movieViewModel = MovieViewModel(_repository,
                 _dispatcher,
@@ -41,6 +45,11 @@ class MovieViewModelTest {
             )
             _movieViewModel.movie.observeForever {  }
             _movieViewModel.getNowPlaying()
+
+            val isLoading = _movieViewModel.movie.value.takeIf {
+                it is ResultState.Loading
+            }
+            assert(_movieViewModel.movie.value == isLoading)
 
             val isMovieModel =
                 _movieViewModel.movie.value.takeIf {
