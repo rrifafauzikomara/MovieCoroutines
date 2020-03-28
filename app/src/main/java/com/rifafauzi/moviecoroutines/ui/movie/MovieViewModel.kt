@@ -60,13 +60,13 @@ class MovieViewModel @Inject constructor(
 
     internal suspend fun showHasData(result: Deferred<List<MovieModel>>) {
         setResultNowPlaying(ResultState.HasData(result.await())).takeUnless {
-            result.await().isEmpty()
+            result.await().isNullOrEmpty()
         }
     }
 
     internal suspend fun showNoData(result: Deferred<List<MovieModel>>) {
         setResultNowPlaying(ResultState.NoData()).takeIf {
-            result.await().isEmpty()
+            result.await().isNullOrEmpty()
         }
     }
 }
