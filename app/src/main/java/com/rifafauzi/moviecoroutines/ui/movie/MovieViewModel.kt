@@ -42,10 +42,10 @@ class MovieViewModel @Inject constructor(
     }
 
     internal fun getNowPlaying() {
-        setResultNowPlaying(ResultState.Loading())
         viewModelScope.launch(mainCoroutineDispatcher) {
-            val result = async(context = backgroundDispatcher) { repository.getListMovie() }
             try {
+                setResultNowPlaying(ResultState.Loading())
+                val result = async(context = backgroundDispatcher) { repository.getListMovie() }
                 showNoData(result)
                 showHasData(result)
             } catch (e: Throwable) {
@@ -60,13 +60,13 @@ class MovieViewModel @Inject constructor(
 
     internal suspend fun showHasData(result: Deferred<List<MovieModel>>) {
         setResultNowPlaying(ResultState.HasData(result.await())).takeUnless {
-            result.await().isEmpty()
+            result.await().isNullOrEmpty()
         }
     }
 
     internal suspend fun showNoData(result: Deferred<List<MovieModel>>) {
         setResultNowPlaying(ResultState.NoData()).takeIf {
-            result.await().isEmpty()
+            result.await().isNullOrEmpty()
         }
     }
 }

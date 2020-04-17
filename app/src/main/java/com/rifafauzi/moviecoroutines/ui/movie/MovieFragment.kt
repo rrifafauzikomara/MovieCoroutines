@@ -27,8 +27,8 @@ class MovieFragment : BaseFragment<FragmentMovieBinding, MovieViewModel>(), Movi
         initRecyclerView()
 
         vm.movie.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                when (it) {
+            it?.let { resultState ->
+                when (resultState) {
                     is ResultState.Loading -> {
                         hideMovie()
                         showLoading()
@@ -36,7 +36,7 @@ class MovieFragment : BaseFragment<FragmentMovieBinding, MovieViewModel>(), Movi
                     is ResultState.HasData -> {
                         showMovie()
                         hideLoading()
-                        refreshData(it.data)
+                        refreshData(resultState.data)
                     }
                     is ResultState.NoData -> {
                         hideMovie()

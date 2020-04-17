@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavController() {
-        navController.addOnDestinationChangedListener(navigationListener)
+        navController.addOnDestinationChangedListener(::getNavigationListener.invoke())
     }
 
     private fun hideToolbarSubtitle() {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(shouldShow)
     }
 
-    private val navigationListener =
+    private fun getNavigationListener() =
         NavController.OnDestinationChangedListener { _, destination, _ ->
             invalidateOptionsMenu()
             hideToolbarSubtitle()

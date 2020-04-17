@@ -8,5 +8,6 @@ import javax.inject.Singleton
 @Singleton
 class MovieRepositoryImpl @Inject constructor(private val apiService: ApiService):MovieRepository {
     override suspend fun getListMovie(): List<MovieModel> =
-        apiService.getMovieNowPlaying().results
+        apiService.getMovieNowPlaying().results.asSequence()
+            .toList()
 }
